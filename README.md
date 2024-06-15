@@ -2,7 +2,7 @@
 
 This module aims to provide Foundry with the full set of safety tools described in [TTRPG Safety Toolkit](https://drive.google.com/drive/folders/114jRmhzBpdqkAlhmveis0nmW73qkAZCj).
 
-![Screen shot of the X card using icons](docs/screenshot-icons.png)
+![Screen shot of the X card using icons](wiki/screenshot-icons.png)
 
 ## Installation
 
@@ -21,7 +21,7 @@ To install this module manually:
 * You can toggle whether each safety card should be visible
 * You can toggle between icons and text
 
-![Screen shot of the X card using text](docs/screenshot-text.png)
+![Screen shot of the X card using text](wiki/screenshot-text.png)
 
 
 # License
