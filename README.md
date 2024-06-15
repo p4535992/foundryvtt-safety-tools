@@ -6,8 +6,8 @@ This module aims to provide Foundry with the full set of safety tools described 
 
 Features include:
 
-Allow selection of an icon or text for the safety tools
-Enable or disable specific safety cards
+- Allow selection of an icon or text for the safety tools
+- Enable or disable specific safety cards
 
 ![Screen shot of the X card using icons](wiki/screenshot-icons.png)
 
