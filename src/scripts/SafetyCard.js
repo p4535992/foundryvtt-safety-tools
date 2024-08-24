@@ -32,7 +32,7 @@ export class SafetyCard {
             const sound = this.game.settings?.get(CONSTANTS.MODULE_NAME, `${this.name}CardSound`);
             if (sound) {
                 console.log(`Safety Tools | Playing ${sound}`);
-                AudioHelper.play({ src: sound, loop: false, autoplay: true });
+                foundry.audio.AudioHelper.play({ src: sound, loop: false, autoplay: true });
             }
             this.window.render(true, { focus: true });
         };

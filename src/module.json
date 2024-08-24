@@ -2,7 +2,7 @@
     "id": "safety-tools",
     "title": "Safety Tools",
     "description": "Safety Tools for Foundry VTT",
-    "version": "0.6.1",
+    "version": "12.0.0",
     "authors": [
         {
             "name": "Max Cerrina"
@@ -26,20 +26,7 @@
             "discord": "wlonk#6479"
         }
     ],
-    "type": "module",
     "socket": true,
-    "includes": [
-        "./assets/**",
-        "./lang/**",
-        "./languages/**",
-        "./scripts/**",
-        "./styles/**",
-        "./templates/**",
-        "./module.json",
-        "./README.md",
-        "./icons/**",
-        "./packs/**"
-    ],
     "media": [
         {
             "type": "icon",
@@ -72,18 +59,17 @@
         }
     ],
     "packs": [],
-    "systems": [],
     "scripts": [],
     "esmodules": ["module.js"],
     "styles": ["styles/styles.css"],
     "compatibility": {
-        "minimum": 11,
-        "verified": 11,
+        "minimum": 12,
+        "verified": 12,
         "maximum": 12
     },
     "url": "https://github.com/p4535992/foundryvtt-safety-tools",
-    "manifest": "https://github.com/p4535992/foundryvtt-safety-tools/releases/download/0.6.1/module.json",
-    "download": "https://github.com/p4535992/foundryvtt-safety-tools/releases/download/0.6.1/module.zip",
+    "manifest": "https://github.com/p4535992/foundryvtt-safety-tools/releases/download/12.0.0/module.json",
+    "download": "https://github.com/p4535992/foundryvtt-safety-tools/releases/download/12.0.0/module.zip",
     "readme": "https://github.com/p4535992/foundryvtt-safety-tools/blob/master/README.md",
     "changelog": "https://github.com/p4535992/foundryvtt-safety-tools/blob/master/CHANGELOG.md",
     "bugs": "https://github.com/p4535992/foundryvtt-safety-tools/issues",
