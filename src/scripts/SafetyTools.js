@@ -24,7 +24,13 @@ export class SafetyTools {
             // console.log("Safety Tools | Registering event listener");
             //   game.socket.on(EVENT_KEY, this.showCardEvent);
             console.log("Safety Tools | Generating cards");
-            if (!this.cards) {
+            if (foundry.utils.isNewerVersion(game.version, 13)) {
+                this.cards = Object.values(SafetyCardName).reduce((map, cardName) => {
+                    map[cardName] = new SafetyCard(ui, cardName, game);
+                    return map;
+                }, {});
+            }
+            else {
                 this.cards = Object.values(SafetyCardName).map((cardName) => new SafetyCard(ui, cardName, game));
             }
         };
@@ -35,9 +41,6 @@ export class SafetyTools {
         // }
         this.onGetSceneControlButtons = (buttons) => {
             console.log("Safety Tools | Adding scene controls");
-            if (!this.cards) {
-                this.cards = Object.values(SafetyCardName).map((cardName) => new SafetyCard(ui, cardName, game));
-            }
             const safetyToolController = {
                 name: CONSTANTS.MODULE_NAME,
                 title: `${CONSTANTS.MODULE_NAME}.Control.Title`,
@@ -47,7 +50,13 @@ export class SafetyTools {
                 icon: "fas fa-hard-hat",
                 layer: CONSTANTS.MODULE_NAME,
             };
-            buttons.push(safetyToolController);
+
+            if (foundry.utils.isNewerVersion(game.version, 13)){
+                buttons[CONSTANTS.MODULE_NAME] = safetyToolController
+            }
+            else {
+                buttons.push(safetyToolController);
+            }
         };
         this.onReady = () => {
             console.log(`Safety Tools | If your friends don't dance,`);

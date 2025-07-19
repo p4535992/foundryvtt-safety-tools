@@ -64,8 +64,8 @@
     "styles": ["styles/styles.css"],
     "compatibility": {
         "minimum": 12,
-        "verified": 12,
-        "maximum": 12
+        "verified": 13,
+        "maximum": 13
     },
     "url": "https://github.com/p4535992/foundryvtt-safety-tools",
     "manifest": "https://github.com/p4535992/foundryvtt-safety-tools/releases/download/12.0.0/module.json",

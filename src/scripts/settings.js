@@ -2,6 +2,7 @@ import "./api.js";
 import { SafetyCardName } from "./SafetyCardName.js";
 import CONSTANTS from "./constants.js";
 import { SafetyCardViewOptions } from "../module.js";
+
 // export const registerKeybindings = function(): void {
 //     // Hand
 //     game.keybindings.register(CONSTANTS.MODULE_NAME, "raiseHand", {
@@ -56,27 +57,31 @@ export const registerSettings = function () {
             });
         },
     });
-    Object.values(SafetyCardName).map((cardName) => {
-        // new SafetyCard(ui, cardName, game)
-        const settingName = `${cardName}CardType`;
-        game.settings.register(CONSTANTS.MODULE_NAME, settingName, {
-            name: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Name`,
-            hint: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Hint`,
-            scope: "world",
-            config: true,
-            type: String,
-            choices: {
-                [SafetyCardViewOptions.Disabled]: `${CONSTANTS.MODULE_NAME}.SettingsValue.Disabled`,
-                [SafetyCardViewOptions.ShowAsText]: `${CONSTANTS.MODULE_NAME}.SettingsValue.ShowAsText`,
-                [SafetyCardViewOptions.ShowAsIcon]: `${CONSTANTS.MODULE_NAME}.SettingsValue.ShowAsIcon`,
-            },
-            default: SafetyCardViewOptions.ShowAsIcon,
-            onChange: (newValue) => {
-                this.viewOption = newValue;
-                this.updateIcon();
-                ui?.controls?.render(true);
-            },
-        });
+    if (foundry.utils.isNewerVersion(game.version, 13)) {
+        Object.values(SafetyCardName).map((cardName) => {
+            // new SafetyCard(ui, cardName, game)
+            const settingName = `${cardName}CardType`;
+            game.settings.register(CONSTANTS.MODULE_NAME, settingName, {
+                name: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Name`,
+                hint: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Hint`,
+                scope: "world",
+                config: true,
+                type: String,
+                choices: {
+                    [SafetyCardViewOptions.Disabled]: `${CONSTANTS.MODULE_NAME}.SettingsValue.Disabled`,
+                    [SafetyCardViewOptions.ShowAsText]: `${CONSTANTS.MODULE_NAME}.SettingsValue.ShowAsText`,
+                    [SafetyCardViewOptions.ShowAsIcon]: `${CONSTANTS.MODULE_NAME}.SettingsValue.ShowAsIcon`,
+                },
+                default: SafetyCardViewOptions.ShowAsIcon,
+                onChange: newValue => {
+                    const card = SafetyCardViewOptions.cards?.[cardName];
+                    if ( card ) {
+                        card.viewOption = newValue;
+                        card.updateIcon();
+                    }
+                    ui.controls?.render(true);
+                },
+            });
         const settingSoundName = `${cardName}CardSound`;
         game.settings.register(CONSTANTS.MODULE_NAME, settingSoundName, {
             name: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Sound.Name`,
@@ -90,6 +95,44 @@ export const registerSettings = function () {
             default: `modules/${CONSTANTS.MODULE_NAME}/assets/defaultSounds/alert.wav`,
         });
     });
+    }
+    else {
+        Object.values(SafetyCardName).map((cardName) => {
+            // new SafetyCard(ui, cardName, game)
+            const settingName = `${cardName}CardType`;
+            game.settings.register(CONSTANTS.MODULE_NAME, settingName, {
+                name: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Name`,
+                hint: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Hint`,
+                scope: "world",
+                config: true,
+                type: String,
+                choices: {
+                    [SafetyCardViewOptions.Disabled]: `${CONSTANTS.MODULE_NAME}.SettingsValue.Disabled`,
+                    [SafetyCardViewOptions.ShowAsText]: `${CONSTANTS.MODULE_NAME}.SettingsValue.ShowAsText`,
+                    [SafetyCardViewOptions.ShowAsIcon]: `${CONSTANTS.MODULE_NAME}.SettingsValue.ShowAsIcon`,
+                },
+                default: SafetyCardViewOptions.ShowAsIcon,
+                onChange: (newValue) => {
+                    this.viewOption = newValue;
+                    print(this.viewOption)
+                    this.updateIcon();
+                    ui?.controls?.render(true);
+                },
+            });
+        const settingSoundName = `${cardName}CardSound`;
+        game.settings.register(CONSTANTS.MODULE_NAME, settingSoundName, {
+            name: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Sound.Name`,
+            hint: `${CONSTANTS.MODULE_NAME}.Settings.${settingName}.Sound.Hint`,
+            scope: "world",
+            config: true,
+            type: String,
+            // This should be constrained to audio in the filepicker, but this is
+            // absent from the SettingConfig type apparently?
+            // filePicker: "audio",
+            default: `modules/${CONSTANTS.MODULE_NAME}/assets/defaultSounds/alert.wav`,
+        });
+    });
+    }
     // ========================================================================
     game.settings.register(CONSTANTS.MODULE_NAME, "debug", {
         name: `${CONSTANTS.MODULE_NAME}.setting.debug.name`,
