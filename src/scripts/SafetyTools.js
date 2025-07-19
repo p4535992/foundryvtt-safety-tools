@@ -29,6 +29,14 @@ export class SafetyTools {
                     map[cardName] = new SafetyCard(ui, cardName, game);
                     return map;
                 }, {});
+                this.cards["dummytool"] = {
+                    name: "dummytool",
+                    title: "Active Tool that Does Nothing",
+                    icon: "fas fa-wrench",
+                    toggle: true,
+                    visible: true,
+                    onChange: () => console.log("Tool toggled"),
+                }
             }
             else {
                 this.cards = Object.values(SafetyCardName).map((cardName) => new SafetyCard(ui, cardName, game));
@@ -52,6 +60,7 @@ export class SafetyTools {
             };
 
             if (foundry.utils.isNewerVersion(game.version, 13)){
+                safetyToolController.activeTool = "dummytool"
                 buttons[CONSTANTS.MODULE_NAME] = safetyToolController
             }
             else {
